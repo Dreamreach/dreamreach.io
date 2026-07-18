@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dreamreach: growth consulting for local businesses and creators</title>
+<meta name="description" content="Dreamreach is a consultancy for local businesses and creators: websites, search visibility, and steady growth. Full site coming soon.">
+<meta property="og:title" content="Dreamreach">
+<meta property="og:description" content="Growth consulting for local businesses and creators. Full site coming soon.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://dreamreach.io/">
+<link rel="icon" type="image/svg+xml" href="assets/mark.svg">
+<style>
+  /* Theme: dark, locked (brand is dark-native). One accent: brand gradient #a14a9c -> #6eccdd. */
+  :root{
+    --bg:#0d0d13;
+    --bg-glow:#16121f;
+    --text:#f4f3f6;
+    --text-dim:#9a97a6;
+    --purple:#a14a9c;
+    --cyan:#6eccdd;
+    --radius:999px; /* shape lock: pill interactive, everything else edge-to-edge */
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{color-scheme:dark}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Futura","Futura PT","Century Gothic","Jost","Avenir Next","Trebuchet MS",sans-serif;
+    font-weight:300;
+    min-height:100dvh;
+    display:flex;
+    flex-direction:column;
+    overflow-x:hidden;
+  }
+
+  /* Background ornament: oversized faint brand mark, slow drift. Decorative only. */
+  .ornament{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+      radial-gradient(60vmax 60vmax at 50% 42%, var(--bg-glow), transparent 70%),
+      radial-gradient(40vmax 40vmax at 85% 90%, rgba(110,204,221,.05), transparent 70%),
+      radial-gradient(40vmax 40vmax at 12% 8%, rgba(161,74,156,.06), transparent 70%);
+  }
+  .ornament img{
+    width:130vmin;
+    max-width:none;
+    opacity:.05;
+  }
+
+  main{
+    position:relative;
+    z-index:1;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:3rem 1.25rem 2rem;
+    gap:0;
+  }
+
+  .mark{
+    width:clamp(96px,16vmin,150px);
+    height:auto;
+    margin-bottom:1.6rem;
+  }
+  .wordmark{
+    font-size:clamp(1.25rem,3.4vw,1.9rem);
+    font-weight:300;
+    letter-spacing:.42em;
+    text-indent:.42em; /* optical centering for tracked caps */
+    text-transform:uppercase;
+    margin-bottom:3.2rem;
+  }
+
+  .eyebrow{
+    font-size:.72rem;
+    letter-spacing:.24em;
+    text-indent:.24em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    margin-bottom:1.1rem;
+  }
+  h1{
+    font-weight:300;
+    font-size:clamp(1.6rem,4.2vw,2.6rem);
+    line-height:1.25;
+    max-width:30ch;
+    margin-bottom:1.1rem;
+  }
+  h1 strong{
+    font-weight:500;
+    background:linear-gradient(100deg,var(--purple),var(--cyan));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .sub{
+    color:var(--text-dim);
+    font-size:clamp(.95rem,1.6vw,1.05rem);
+    line-height:1.65;
+    max-width:44ch;
+    margin-bottom:2.4rem;
+  }
+
+  .cta{
+    display:inline-block;
+    position:relative;
+    padding:.85rem 2.1rem;
+    border-radius:var(--radius);
+    color:var(--text);
+    text-decoration:none;
+    font-size:.95rem;
+    letter-spacing:.08em;
+    background:
+      linear-gradient(var(--bg),var(--bg)) padding-box,
+      linear-gradient(100deg,var(--purple),var(--cyan)) border-box;
+    border:1px solid transparent;
+    transition:transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s cubic-bezier(.16,1,.3,1);
+  }
+  .cta:hover{
+    box-shadow:0 6px 30px rgba(110,204,221,.18), 0 2px 12px rgba(161,74,156,.18);
+    transform:translateY(-1px);
+  }
+  .cta:active{transform:translateY(0) scale(.98)}
+  .cta:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+
+  footer{
+    position:relative;
+    z-index:1;
+    text-align:center;
+    padding:1.4rem 1.25rem 1.8rem;
+    color:var(--text-dim);
+    font-size:.8rem;
+    letter-spacing:.06em;
+  }
+
+  /* Load-in cascade + ornament drift. Gated for reduced motion. */
+  @media (prefers-reduced-motion: no-preference){
+    .mark,.wordmark,.eyebrow,h1,.sub,.cta{
+      opacity:0;
+      transform:translateY(14px);
+      animation:rise .9s cubic-bezier(.16,1,.3,1) forwards;
+    }
+    .mark{animation-delay:.05s}
+    .wordmark{animation-delay:.18s}
+    .eyebrow{animation-delay:.34s}
+    h1{animation-delay:.44s}
+    .sub{animation-delay:.54s}
+    .cta{animation-delay:.66s}
+    @keyframes rise{to{opacity:1;transform:none}}
+  }
+</style>
+</head>
+<body>
+  <div class="ornament" aria-hidden="true"><img src="assets/mark.svg" alt=""></div>
+
+  <main>
+    <img class="mark" src="assets/mark.svg" alt="Dreamreach logo">
+    <div class="wordmark">Dreamreach</div>
+
+    <p class="eyebrow">Coming soon</p>
+    <h1>Helping local businesses and creators <strong>reach further</strong>.</h1>
+    <p class="sub">Websites, search visibility, and steady growth. Our full site is under construction. Until then, we are one message away.</p>
+    <a class="cta" href="mailto:support@dreamreach.io">Email Dreamreach</a>
+  </main>
+
+  <footer>&copy; 2026 Dreamreach</footer>
+</body>
+</html>
