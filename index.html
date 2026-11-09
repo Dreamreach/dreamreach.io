@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dreamreach: growth consulting for local businesses and creators</title>
-<meta name="description" content="Dreamreach is a consultancy for local businesses and creators: websites, search visibility, and steady growth. Full site coming soon.">
+<title>Dreamreach: growth consulting for small businesses and creators</title>
+<meta name="description" content="Dreamreach is a consultancy for small businesses and creators: websites, search visibility, and steady growth. Full site coming soon.">
 <meta property="og:title" content="Dreamreach">
-<meta property="og:description" content="Growth consulting for local businesses and creators. Full site coming soon.">
+<meta property="og:description" content="Growth consulting for small businesses and creators. Full site coming soon.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://dreamreach.io/">
 <link rel="icon" type="image/svg+xml" href="assets/mark.svg">
 <style>
-  /* Theme: dark, locked (brand is dark-native). One accent: brand gradient #a14a9c -> #6eccdd. */
+  /* Theme: dark, locked (brand is dark-native). Flat accents: cyan working, purple rare; the gradient lives only inside the mark file (brand rule M10). */
   :root{
-    --bg:#0d0d13;
+    --bg:#0F0F16;
     --bg-glow:#16121f;
     --text:#f4f3f6;
     --text-dim:#9a97a6;
@@ -73,11 +73,8 @@
     margin-bottom:1.6rem;
   }
   .wordmark{
-    font-size:clamp(1.25rem,3.4vw,1.9rem);
-    font-weight:300;
-    letter-spacing:.42em;
-    text-indent:.42em; /* optical centering for tracked caps */
-    text-transform:uppercase;
+    width:clamp(180px,34vw,300px);
+    height:auto;
     margin-bottom:3.2rem;
   }
 
@@ -98,10 +95,7 @@
   }
   h1 strong{
     font-weight:500;
-    background:linear-gradient(100deg,var(--purple),var(--cyan));
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
+    color:var(--cyan);
   }
   .sub{
     color:var(--text-dim);
@@ -120,14 +114,12 @@
     text-decoration:none;
     font-size:.95rem;
     letter-spacing:.08em;
-    background:
-      linear-gradient(var(--bg),var(--bg)) padding-box,
-      linear-gradient(100deg,var(--purple),var(--cyan)) border-box;
-    border:1px solid transparent;
+    background:transparent;
+    border:1px solid var(--cyan);
     transition:transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s cubic-bezier(.16,1,.3,1);
   }
   .cta:hover{
-    box-shadow:0 6px 30px rgba(110,204,221,.18), 0 2px 12px rgba(161,74,156,.18);
+    box-shadow:0 6px 30px rgba(110,204,221,.18);
     transform:translateY(-1px);
   }
   .cta:active{transform:translateY(0) scale(.98)}
@@ -165,7 +157,7 @@
 
   <main>
     <img class="mark" src="assets/mark.svg" alt="Dreamreach logo">
-    <div class="wordmark">Dreamreach</div>
+    <img class="wordmark" src="assets/type-white.svg" alt="Dreamreach">
 
     <p class="eyebrow">Coming soon</p>
     <h1>Helping local businesses and creators <strong>reach further</strong>.</h1>
