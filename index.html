@@ -5,166 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dreamreach: growth consulting for small businesses and creators</title>
 <meta name="description" content="Dreamreach is a consultancy for small businesses and creators: websites, search visibility, and steady growth. Full site coming soon.">
+<link rel="canonical" href="https://dreamreach.io/">
 <meta property="og:title" content="Dreamreach">
 <meta property="og:description" content="Growth consulting for small businesses and creators. Full site coming soon.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://dreamreach.io/">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0a0b">
 <link rel="icon" type="image/svg+xml" href="assets/mark.svg">
-<style>
-  /* Theme: dark, locked (brand is dark-native). Flat accents: cyan working, purple rare; the gradient lives only inside the mark file (brand rule M10). */
-  :root{
-    --bg:#0F0F16;
-    --bg-glow:#16121f;
-    --text:#f4f3f6;
-    --text-dim:#9a97a6;
-    --purple:#a14a9c;
-    --cyan:#6eccdd;
-    --radius:999px; /* shape lock: pill interactive, everything else edge-to-edge */
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{color-scheme:dark}
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:"Futura","Futura PT","Century Gothic","Jost","Avenir Next","Trebuchet MS",sans-serif;
-    font-weight:300;
-    min-height:100dvh;
-    display:flex;
-    flex-direction:column;
-    overflow-x:hidden;
-  }
-
-  /* Background ornament: oversized faint brand mark, slow drift. Decorative only. */
-  .ornament{
-    position:fixed;
-    inset:0;
-    z-index:0;
-    pointer-events:none;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:
-      radial-gradient(60vmax 60vmax at 50% 42%, var(--bg-glow), transparent 70%),
-      radial-gradient(40vmax 40vmax at 85% 90%, rgba(110,204,221,.05), transparent 70%),
-      radial-gradient(40vmax 40vmax at 12% 8%, rgba(161,74,156,.06), transparent 70%);
-  }
-  .ornament img{
-    width:130vmin;
-    max-width:none;
-    opacity:.05;
-  }
-
-  main{
-    position:relative;
-    z-index:1;
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:3rem 1.25rem 2rem;
-    gap:0;
-  }
-
-  .mark{
-    width:clamp(96px,16vmin,150px);
-    height:auto;
-    margin-bottom:1.6rem;
-  }
-  .wordmark{
-    width:clamp(180px,34vw,300px);
-    height:auto;
-    margin-bottom:3.2rem;
-  }
-
-  .eyebrow{
-    font-size:.72rem;
-    letter-spacing:.24em;
-    text-indent:.24em;
-    text-transform:uppercase;
-    color:var(--text-dim);
-    margin-bottom:1.1rem;
-  }
-  h1{
-    font-weight:300;
-    font-size:clamp(1.6rem,4.2vw,2.6rem);
-    line-height:1.25;
-    max-width:30ch;
-    margin-bottom:1.1rem;
-  }
-  h1 strong{
-    font-weight:500;
-    color:var(--cyan);
-  }
-  .sub{
-    color:var(--text-dim);
-    font-size:clamp(.95rem,1.6vw,1.05rem);
-    line-height:1.65;
-    max-width:44ch;
-    margin-bottom:2.4rem;
-  }
-
-  .cta{
-    display:inline-block;
-    position:relative;
-    padding:.85rem 2.1rem;
-    border-radius:var(--radius);
-    color:var(--text);
-    text-decoration:none;
-    font-size:.95rem;
-    letter-spacing:.08em;
-    background:transparent;
-    border:1px solid var(--cyan);
-    transition:transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s cubic-bezier(.16,1,.3,1);
-  }
-  .cta:hover{
-    box-shadow:0 6px 30px rgba(110,204,221,.18);
-    transform:translateY(-1px);
-  }
-  .cta:active{transform:translateY(0) scale(.98)}
-  .cta:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
-
-  footer{
-    position:relative;
-    z-index:1;
-    text-align:center;
-    padding:1.4rem 1.25rem 1.8rem;
-    color:var(--text-dim);
-    font-size:.8rem;
-    letter-spacing:.06em;
-  }
-
-  /* Load-in cascade + ornament drift. Gated for reduced motion. */
-  @media (prefers-reduced-motion: no-preference){
-    .mark,.wordmark,.eyebrow,h1,.sub,.cta{
-      opacity:0;
-      transform:translateY(14px);
-      animation:rise .9s cubic-bezier(.16,1,.3,1) forwards;
-    }
-    .mark{animation-delay:.05s}
-    .wordmark{animation-delay:.18s}
-    .eyebrow{animation-delay:.34s}
-    h1{animation-delay:.44s}
-    .sub{animation-delay:.54s}
-    .cta{animation-delay:.66s}
-    @keyframes rise{to{opacity:1;transform:none}}
-  }
-</style>
+<link rel="preload" href="assets/fonts/Fraunces-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/site.css">
+<script type="module" src="assets/field.js"></script>
 </head>
 <body>
-  <div class="ornament" aria-hidden="true"><img src="assets/mark.svg" alt=""></div>
+<div class="hero">
+  <div class="hero_bg" aria-hidden="true">
+    <svg class="hero_columns" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><g id="hex-col"><polygon points="34.2,0.0 17.1,16.29 17.1,536.29 34.2,520.0" fill="currentColor" /><polygon points="34.2,0.0 17.1,16.29 17.1,536.29 34.2,520.0" fill="#000" fill-opacity="0.38" /><polygon points="17.1,16.29 -17.1,16.29 -17.1,536.29 17.1,536.29" fill="currentColor" /><polygon points="17.1,16.29 -17.1,16.29 -17.1,536.29 17.1,536.29" fill="#000" fill-opacity="0.55" /><polygon points="-17.1,16.29 -34.2,0.0 -34.2,520.0 -17.1,536.29" fill="currentColor" /><polygon points="-17.1,16.29 -34.2,0.0 -34.2,520.0 -17.1,536.29" fill="#000" fill-opacity="0.68" /><polygon points="34.2,0.0 17.1,16.29 -17.1,16.29 -34.2,0.0 -17.1,-16.29 17.1,-16.29" fill="currentColor" stroke="#ffffff" stroke-opacity=".05" stroke-width="1" /></g></defs><use href="#hex-col" x="0.0" y="250.0" data-hex="" /><use href="#hex-col" x="108.0" y="250.0" data-hex="" /><use href="#hex-col" x="216.0" y="250.0" data-hex="" /><use href="#hex-col" x="324.0" y="250.0" data-hex="" /><use href="#hex-col" x="432.0" y="250.0" data-hex="" /><use href="#hex-col" x="540.0" y="250.0" data-hex="" /><use href="#hex-col" x="648.0" y="250.0" data-hex="" /><use href="#hex-col" x="756.0" y="250.0" data-hex="" /><use href="#hex-col" x="864.0" y="250.0" data-hex="" /><use href="#hex-col" x="972.0" y="250.0" data-hex="" /><use href="#hex-col" x="1080.0" y="250.0" data-hex="" /><use href="#hex-col" x="1188.0" y="250.0" data-hex="" /><use href="#hex-col" x="1296.0" y="250.0" data-hex="" /><use href="#hex-col" x="1404.0" y="250.0" data-hex="" /><use href="#hex-col" x="-54.0" y="267.1" data-hex="" /><use href="#hex-col" x="54.0" y="267.1" data-hex="" /><use href="#hex-col" x="162.0" y="267.1" data-hex="" /><use href="#hex-col" x="270.0" y="267.1" data-hex="" /><use href="#hex-col" x="378.0" y="267.1" data-hex="" /><use href="#hex-col" x="486.0" y="267.1" data-hex="" /><use href="#hex-col" x="594.0" y="267.1" data-hex="" /><use href="#hex-col" x="702.0" y="267.1" data-hex="" /><use href="#hex-col" x="810.0" y="267.1" data-hex="" /><use href="#hex-col" x="918.0" y="267.1" data-hex="" /><use href="#hex-col" x="1026.0" y="267.1" data-hex="" /><use href="#hex-col" x="1134.0" y="267.1" data-hex="" /><use href="#hex-col" x="1242.0" y="267.1" data-hex="" /><use href="#hex-col" x="1350.0" y="267.1" data-hex="" /><use href="#hex-col" x="1458.0" y="267.1" data-hex="" /><use href="#hex-col" x="0.0" y="284.3" data-hex="" /><use href="#hex-col" x="108.0" y="284.3" data-hex="" /><use href="#hex-col" x="216.0" y="284.3" data-hex="" /><use href="#hex-col" x="324.0" y="284.3" data-hex="" /><use href="#hex-col" x="432.0" y="284.3" data-hex="" /><use href="#hex-col" x="540.0" y="284.3" data-hex="" /><use href="#hex-col" x="648.0" y="284.3" data-hex="" /><use href="#hex-col" x="756.0" y="284.3" data-hex="" /><use href="#hex-col" x="864.0" y="284.3" data-hex="" /><use href="#hex-col" x="972.0" y="284.3" data-hex="" /><use href="#hex-col" x="1080.0" y="284.3" data-hex="" /><use href="#hex-col" x="1188.0" y="284.3" data-hex="" /><use href="#hex-col" x="1296.0" y="284.3" data-hex="" /><use href="#hex-col" x="1404.0" y="284.3" data-hex="" /><use href="#hex-col" x="-54.0" y="301.4" data-hex="" /><use href="#hex-col" x="54.0" y="301.4" data-hex="" /><use href="#hex-col" x="162.0" y="301.4" data-hex="" /><use href="#hex-col" x="270.0" y="301.4" data-hex="" /><use href="#hex-col" x="378.0" y="301.4" data-hex="" /><use href="#hex-col" x="486.0" y="301.4" data-hex="" /><use href="#hex-col" x="594.0" y="301.4" data-hex="" /><use href="#hex-col" x="702.0" y="301.4" data-hex="" /><use href="#hex-col" x="810.0" y="301.4" data-hex="" /><use href="#hex-col" x="918.0" y="301.4" data-hex="" /><use href="#hex-col" x="1026.0" y="301.4" data-hex="" /><use href="#hex-col" x="1134.0" y="301.4" data-hex="" /><use href="#hex-col" x="1242.0" y="301.4" data-hex="" /><use href="#hex-col" x="1350.0" y="301.4" data-hex="" /><use href="#hex-col" x="1458.0" y="301.4" data-hex="" /><use href="#hex-col" x="0.0" y="318.6" data-hex="" /><use href="#hex-col" x="108.0" y="318.6" data-hex="" /><use href="#hex-col" x="216.0" y="318.6" data-hex="" /><use href="#hex-col" x="324.0" y="318.6" data-hex="" /><use href="#hex-col" x="432.0" y="318.6" data-hex="" /><use href="#hex-col" x="540.0" y="318.6" data-hex="" /><use href="#hex-col" x="648.0" y="318.6" data-hex="" /><use href="#hex-col" x="756.0" y="318.6" data-hex="" /><use href="#hex-col" x="864.0" y="318.6" data-hex="" /><use href="#hex-col" x="972.0" y="318.6" data-hex="" /><use href="#hex-col" x="1080.0" y="318.6" data-hex="" /><use href="#hex-col" x="1188.0" y="318.6" data-hex="" /><use href="#hex-col" x="1296.0" y="318.6" data-hex="" /><use href="#hex-col" x="1404.0" y="318.6" data-hex="" /><use href="#hex-col" x="-54.0" y="335.7" data-hex="" /><use href="#hex-col" x="54.0" y="335.7" data-hex="" /><use href="#hex-col" x="162.0" y="335.7" data-hex="" /><use href="#hex-col" x="270.0" y="335.7" data-hex="" /><use href="#hex-col" x="378.0" y="335.7" data-hex="" /><use href="#hex-col" x="486.0" y="335.7" data-hex="" /><use href="#hex-col" x="594.0" y="335.7" data-hex="" /><use href="#hex-col" x="702.0" y="335.7" data-hex="" /><use href="#hex-col" x="810.0" y="335.7" data-hex="" /><use href="#hex-col" x="918.0" y="335.7" data-hex="" /><use href="#hex-col" x="1026.0" y="335.7" data-hex="" /><use href="#hex-col" x="1134.0" y="335.7" data-hex="" /><use href="#hex-col" x="1242.0" y="335.7" data-hex="" /><use href="#hex-col" x="1350.0" y="335.7" data-hex="" /><use href="#hex-col" x="1458.0" y="335.7" data-hex="" /><use href="#hex-col" x="0.0" y="352.9" data-hex="" /><use href="#hex-col" x="108.0" y="352.9" data-hex="" /><use href="#hex-col" x="216.0" y="352.9" data-hex="" /><use href="#hex-col" x="324.0" y="352.9" data-hex="" /><use href="#hex-col" x="432.0" y="352.9" data-hex="" /><use href="#hex-col" x="540.0" y="352.9" data-hex="" /><use href="#hex-col" x="648.0" y="352.9" data-hex="" /><use href="#hex-col" x="756.0" y="352.9" data-hex="" /><use href="#hex-col" x="864.0" y="352.9" data-hex="" /><use href="#hex-col" x="972.0" y="352.9" data-hex="" /><use href="#hex-col" x="1080.0" y="352.9" data-hex="" /><use href="#hex-col" x="1188.0" y="352.9" data-hex="" /><use href="#hex-col" x="1296.0" y="352.9" data-hex="" /><use href="#hex-col" x="1404.0" y="352.9" data-hex="" /><use href="#hex-col" x="-54.0" y="370.0" data-hex="" /><use href="#hex-col" x="54.0" y="370.0" data-hex="" /><use href="#hex-col" x="162.0" y="370.0" data-hex="" /><use href="#hex-col" x="270.0" y="370.0" data-hex="" /><use href="#hex-col" x="378.0" y="370.0" data-hex="" /><use href="#hex-col" x="486.0" y="370.0" data-hex="" /><use href="#hex-col" x="594.0" y="370.0" data-hex="" /><use href="#hex-col" x="702.0" y="370.0" data-hex="" /><use href="#hex-col" x="810.0" y="370.0" data-hex="" /><use href="#hex-col" x="918.0" y="370.0" data-hex="" /><use href="#hex-col" x="1026.0" y="370.0" data-hex="" /><use href="#hex-col" x="1134.0" y="370.0" data-hex="" /><use href="#hex-col" x="1242.0" y="370.0" data-hex="" /><use href="#hex-col" x="1350.0" y="370.0" data-hex="" /><use href="#hex-col" x="1458.0" y="370.0" data-hex="" /><use href="#hex-col" x="0.0" y="387.2" data-hex="" /><use href="#hex-col" x="108.0" y="387.2" data-hex="" /><use href="#hex-col" x="216.0" y="387.2" data-hex="" /><use href="#hex-col" x="324.0" y="387.2" data-hex="" /><use href="#hex-col" x="432.0" y="387.2" data-hex="" /><use href="#hex-col" x="540.0" y="387.2" data-hex="" /><use href="#hex-col" x="648.0" y="387.2" data-hex="" /><use href="#hex-col" x="756.0" y="387.2" data-hex="" /><use href="#hex-col" x="864.0" y="387.2" data-hex="" /><use href="#hex-col" x="972.0" y="387.2" data-hex="" /><use href="#hex-col" x="1080.0" y="387.2" data-hex="" /><use href="#hex-col" x="1188.0" y="387.2" data-hex="" /><use href="#hex-col" x="1296.0" y="387.2" data-hex="" /><use href="#hex-col" x="1404.0" y="387.2" data-hex="" /><use href="#hex-col" x="-54.0" y="404.3" data-hex="" /><use href="#hex-col" x="54.0" y="404.3" data-hex="" /><use href="#hex-col" x="162.0" y="404.3" data-hex="" /><use href="#hex-col" x="270.0" y="404.3" data-hex="" /><use href="#hex-col" x="378.0" y="404.3" data-hex="" /><use href="#hex-col" x="486.0" y="404.3" data-hex="" /><use href="#hex-col" x="594.0" y="404.3" data-hex="" /><use href="#hex-col" x="702.0" y="404.3" data-hex="" /><use href="#hex-col" x="810.0" y="404.3" data-hex="" /><use href="#hex-col" x="918.0" y="404.3" data-hex="" /><use href="#hex-col" x="1026.0" y="404.3" data-hex="" /><use href="#hex-col" x="1134.0" y="404.3" data-hex="" /><use href="#hex-col" x="1242.0" y="404.3" data-hex="" /><use href="#hex-col" x="1350.0" y="404.3" data-hex="" /><use href="#hex-col" x="1458.0" y="404.3" data-hex="" /><use href="#hex-col" x="0.0" y="421.5" data-hex="" /><use href="#hex-col" x="108.0" y="421.5" data-hex="" /><use href="#hex-col" x="216.0" y="421.5" data-hex="" /><use href="#hex-col" x="324.0" y="421.5" data-hex="" /><use href="#hex-col" x="432.0" y="421.5" data-hex="" /><use href="#hex-col" x="540.0" y="421.5" data-hex="" /><use href="#hex-col" x="648.0" y="421.5" data-hex="" /><use href="#hex-col" x="756.0" y="421.5" data-hex="" /><use href="#hex-col" x="864.0" y="421.5" data-hex="" /><use href="#hex-col" x="972.0" y="421.5" data-hex="" /><use href="#hex-col" x="1080.0" y="421.5" data-hex="" /><use href="#hex-col" x="1188.0" y="421.5" data-hex="" /><use href="#hex-col" x="1296.0" y="421.5" data-hex="" /><use href="#hex-col" x="1404.0" y="421.5" data-hex="" /><use href="#hex-col" x="-54.0" y="438.6" data-hex="" /><use href="#hex-col" x="54.0" y="438.6" data-hex="" /><use href="#hex-col" x="162.0" y="438.6" data-hex="" /><use href="#hex-col" x="270.0" y="438.6" data-hex="" /><use href="#hex-col" x="378.0" y="438.6" data-hex="" /><use href="#hex-col" x="486.0" y="438.6" data-hex="" /><use href="#hex-col" x="594.0" y="438.6" data-hex="" /><use href="#hex-col" x="702.0" y="438.6" data-hex="" /><use href="#hex-col" x="810.0" y="438.6" data-hex="" /><use href="#hex-col" x="918.0" y="438.6" data-hex="" /><use href="#hex-col" x="1026.0" y="438.6" data-hex="" /><use href="#hex-col" x="1134.0" y="438.6" data-hex="" /><use href="#hex-col" x="1242.0" y="438.6" data-hex="" /><use href="#hex-col" x="1350.0" y="438.6" data-hex="" /><use href="#hex-col" x="1458.0" y="438.6" data-hex="" /><use href="#hex-col" x="0.0" y="455.8" data-hex="" /><use href="#hex-col" x="108.0" y="455.8" data-hex="" /><use href="#hex-col" x="216.0" y="455.8" data-hex="" /><use href="#hex-col" x="324.0" y="455.8" data-hex="" /><use href="#hex-col" x="432.0" y="455.8" data-hex="" /><use href="#hex-col" x="540.0" y="455.8" data-hex="" /><use href="#hex-col" x="648.0" y="455.8" data-hex="" /><use href="#hex-col" x="756.0" y="455.8" data-hex="" /><use href="#hex-col" x="864.0" y="455.8" data-hex="" /><use href="#hex-col" x="972.0" y="455.8" data-hex="" /><use href="#hex-col" x="1080.0" y="455.8" data-hex="" /><use href="#hex-col" x="1188.0" y="455.8" data-hex="" /><use href="#hex-col" x="1296.0" y="455.8" data-hex="" /><use href="#hex-col" x="1404.0" y="455.8" data-hex="" /><use href="#hex-col" x="-54.0" y="472.9" data-hex="" /><use href="#hex-col" x="54.0" y="472.9" data-hex="" /><use href="#hex-col" x="162.0" y="472.9" data-hex="" /><use href="#hex-col" x="270.0" y="472.9" data-hex="" /><use href="#hex-col" x="378.0" y="472.9" data-hex="" /><use href="#hex-col" x="486.0" y="472.9" data-hex="" /><use href="#hex-col" x="594.0" y="472.9" data-hex="" /><use href="#hex-col" x="702.0" y="472.9" data-hex="" /><use href="#hex-col" x="810.0" y="472.9" data-hex="" /><use href="#hex-col" x="918.0" y="472.9" data-hex="" /><use href="#hex-col" x="1026.0" y="472.9" data-hex="" /><use href="#hex-col" x="1134.0" y="472.9" data-hex="" /><use href="#hex-col" x="1242.0" y="472.9" data-hex="" /><use href="#hex-col" x="1350.0" y="472.9" data-hex="" /><use href="#hex-col" x="1458.0" y="472.9" data-hex="" /><use href="#hex-col" x="0.0" y="490.1" data-hex="" /><use href="#hex-col" x="108.0" y="490.1" data-hex="" /><use href="#hex-col" x="216.0" y="490.1" data-hex="" /><use href="#hex-col" x="324.0" y="490.1" data-hex="" /><use href="#hex-col" x="432.0" y="490.1" data-hex="" /><use href="#hex-col" x="540.0" y="490.1" data-hex="" /><use href="#hex-col" x="648.0" y="490.1" data-hex="" /><use href="#hex-col" x="756.0" y="490.1" data-hex="" /><use href="#hex-col" x="864.0" y="490.1" data-hex="" /><use href="#hex-col" x="972.0" y="490.1" data-hex="" /><use href="#hex-col" x="1080.0" y="490.1" data-hex="" /><use href="#hex-col" x="1188.0" y="490.1" data-hex="" /><use href="#hex-col" x="1296.0" y="490.1" data-hex="" /><use href="#hex-col" x="1404.0" y="490.1" data-hex="" /><use href="#hex-col" x="-54.0" y="507.2" data-hex="" /><use href="#hex-col" x="54.0" y="507.2" data-hex="" /><use href="#hex-col" x="162.0" y="507.2" data-hex="" /><use href="#hex-col" x="270.0" y="507.2" data-hex="" /><use href="#hex-col" x="378.0" y="507.2" data-hex="" /><use href="#hex-col" x="486.0" y="507.2" data-hex="" /><use href="#hex-col" x="594.0" y="507.2" data-hex="" /><use href="#hex-col" x="702.0" y="507.2" data-hex="" /><use href="#hex-col" x="810.0" y="507.2" data-hex="" /><use href="#hex-col" x="918.0" y="507.2" data-hex="" /><use href="#hex-col" x="1026.0" y="507.2" data-hex="" /><use href="#hex-col" x="1134.0" y="507.2" data-hex="" /><use href="#hex-col" x="1242.0" y="507.2" data-hex="" /><use href="#hex-col" x="1350.0" y="507.2" data-hex="" /><use href="#hex-col" x="1458.0" y="507.2" data-hex="" /><use href="#hex-col" x="0.0" y="524.4" data-hex="" /><use href="#hex-col" x="108.0" y="524.4" data-hex="" /><use href="#hex-col" x="216.0" y="524.4" data-hex="" /><use href="#hex-col" x="324.0" y="524.4" data-hex="" /><use href="#hex-col" x="432.0" y="524.4" data-hex="" /><use href="#hex-col" x="540.0" y="524.4" data-hex="" /><use href="#hex-col" x="648.0" y="524.4" data-hex="" /><use href="#hex-col" x="756.0" y="524.4" data-hex="" /><use href="#hex-col" x="864.0" y="524.4" data-hex="" /><use href="#hex-col" x="972.0" y="524.4" data-hex="" /><use href="#hex-col" x="1080.0" y="524.4" data-hex="" /><use href="#hex-col" x="1188.0" y="524.4" data-hex="" /><use href="#hex-col" x="1296.0" y="524.4" data-hex="" /><use href="#hex-col" x="1404.0" y="524.4" data-hex="" /><use href="#hex-col" x="-54.0" y="541.5" data-hex="" /><use href="#hex-col" x="54.0" y="541.5" data-hex="" /><use href="#hex-col" x="162.0" y="541.5" data-hex="" /><use href="#hex-col" x="270.0" y="541.5" data-hex="" /><use href="#hex-col" x="378.0" y="541.5" data-hex="" /><use href="#hex-col" x="486.0" y="541.5" data-hex="" /><use href="#hex-col" x="594.0" y="541.5" data-hex="" /><use href="#hex-col" x="702.0" y="541.5" data-hex="" /><use href="#hex-col" x="810.0" y="541.5" data-hex="" /><use href="#hex-col" x="918.0" y="541.5" data-hex="" /><use href="#hex-col" x="1026.0" y="541.5" data-hex="" /><use href="#hex-col" x="1134.0" y="541.5" data-hex="" /><use href="#hex-col" x="1242.0" y="541.5" data-hex="" /><use href="#hex-col" x="1350.0" y="541.5" data-hex="" /><use href="#hex-col" x="1458.0" y="541.5" data-hex="" /><use href="#hex-col" x="0.0" y="558.7" data-hex="" /><use href="#hex-col" x="108.0" y="558.7" data-hex="" /><use href="#hex-col" x="216.0" y="558.7" data-hex="" /><use href="#hex-col" x="324.0" y="558.7" data-hex="" /><use href="#hex-col" x="432.0" y="558.7" data-hex="" /><use href="#hex-col" x="540.0" y="558.7" data-hex="" /><use href="#hex-col" x="648.0" y="558.7" data-hex="" /><use href="#hex-col" x="756.0" y="558.7" data-hex="" /><use href="#hex-col" x="864.0" y="558.7" data-hex="" /><use href="#hex-col" x="972.0" y="558.7" data-hex="" /><use href="#hex-col" x="1080.0" y="558.7" data-hex="" /><use href="#hex-col" x="1188.0" y="558.7" data-hex="" /><use href="#hex-col" x="1296.0" y="558.7" data-hex="" /><use href="#hex-col" x="1404.0" y="558.7" data-hex="" /><use href="#hex-col" x="-54.0" y="575.8" data-hex="" /><use href="#hex-col" x="54.0" y="575.8" data-hex="" /><use href="#hex-col" x="162.0" y="575.8" data-hex="" /><use href="#hex-col" x="270.0" y="575.8" data-hex="" /><use href="#hex-col" x="378.0" y="575.8" data-hex="" /><use href="#hex-col" x="486.0" y="575.8" data-hex="" /><use href="#hex-col" x="594.0" y="575.8" data-hex="" /><use href="#hex-col" x="702.0" y="575.8" data-hex="" /><use href="#hex-col" x="810.0" y="575.8" data-hex="" /><use href="#hex-col" x="918.0" y="575.8" data-hex="" /><use href="#hex-col" x="1026.0" y="575.8" data-hex="" /><use href="#hex-col" x="1134.0" y="575.8" data-hex="" /><use href="#hex-col" x="1242.0" y="575.8" data-hex="" /><use href="#hex-col" x="1350.0" y="575.8" data-hex="" /><use href="#hex-col" x="1458.0" y="575.8" data-hex="" /><use href="#hex-col" x="0.0" y="592.9" data-hex="" /><use href="#hex-col" x="108.0" y="592.9" data-hex="" /><use href="#hex-col" x="216.0" y="592.9" data-hex="" /><use href="#hex-col" x="324.0" y="592.9" data-hex="" /><use href="#hex-col" x="432.0" y="592.9" data-hex="" /><use href="#hex-col" x="540.0" y="592.9" data-hex="" /><use href="#hex-col" x="648.0" y="592.9" data-hex="" /><use href="#hex-col" x="756.0" y="592.9" data-hex="" /><use href="#hex-col" x="864.0" y="592.9" data-hex="" /><use href="#hex-col" x="972.0" y="592.9" data-hex="" /><use href="#hex-col" x="1080.0" y="592.9" data-hex="" /><use href="#hex-col" x="1188.0" y="592.9" data-hex="" /><use href="#hex-col" x="1296.0" y="592.9" data-hex="" /><use href="#hex-col" x="1404.0" y="592.9" data-hex="" /><use href="#hex-col" x="-54.0" y="610.1" data-hex="" /><use href="#hex-col" x="54.0" y="610.1" data-hex="" /><use href="#hex-col" x="162.0" y="610.1" data-hex="" /><use href="#hex-col" x="270.0" y="610.1" data-hex="" /><use href="#hex-col" x="378.0" y="610.1" data-hex="" /><use href="#hex-col" x="486.0" y="610.1" data-hex="" /><use href="#hex-col" x="594.0" y="610.1" data-hex="" /><use href="#hex-col" x="702.0" y="610.1" data-hex="" /><use href="#hex-col" x="810.0" y="610.1" data-hex="" /><use href="#hex-col" x="918.0" y="610.1" data-hex="" /><use href="#hex-col" x="1026.0" y="610.1" data-hex="" /><use href="#hex-col" x="1134.0" y="610.1" data-hex="" /><use href="#hex-col" x="1242.0" y="610.1" data-hex="" /><use href="#hex-col" x="1350.0" y="610.1" data-hex="" /><use href="#hex-col" x="1458.0" y="610.1" data-hex="" /><use href="#hex-col" x="0.0" y="627.2" data-hex="" /><use href="#hex-col" x="108.0" y="627.2" data-hex="" /><use href="#hex-col" x="216.0" y="627.2" data-hex="" /><use href="#hex-col" x="324.0" y="627.2" data-hex="" /><use href="#hex-col" x="432.0" y="627.2" data-hex="" /><use href="#hex-col" x="540.0" y="627.2" data-hex="" /><use href="#hex-col" x="648.0" y="627.2" data-hex="" /><use href="#hex-col" x="756.0" y="627.2" data-hex="" /><use href="#hex-col" x="864.0" y="627.2" data-hex="" /><use href="#hex-col" x="972.0" y="627.2" data-hex="" /><use href="#hex-col" x="1080.0" y="627.2" data-hex="" /><use href="#hex-col" x="1188.0" y="627.2" data-hex="" /><use href="#hex-col" x="1296.0" y="627.2" data-hex="" /><use href="#hex-col" x="1404.0" y="627.2" data-hex="" /><use href="#hex-col" x="-54.0" y="644.4" data-hex="" /><use href="#hex-col" x="54.0" y="644.4" data-hex="" /><use href="#hex-col" x="162.0" y="644.4" data-hex="" /><use href="#hex-col" x="270.0" y="644.4" data-hex="" /><use href="#hex-col" x="378.0" y="644.4" data-hex="" /><use href="#hex-col" x="486.0" y="644.4" data-hex="" /><use href="#hex-col" x="594.0" y="644.4" data-hex="" /><use href="#hex-col" x="702.0" y="644.4" data-hex="" /><use href="#hex-col" x="810.0" y="644.4" data-hex="" /><use href="#hex-col" x="918.0" y="644.4" data-hex="" /><use href="#hex-col" x="1026.0" y="644.4" data-hex="" /><use href="#hex-col" x="1134.0" y="644.4" data-hex="" /><use href="#hex-col" x="1242.0" y="644.4" data-hex="" /><use href="#hex-col" x="1350.0" y="644.4" data-hex="" /><use href="#hex-col" x="1458.0" y="644.4" data-hex="" /><use href="#hex-col" x="0.0" y="661.5" data-hex="" /><use href="#hex-col" x="108.0" y="661.5" data-hex="" /><use href="#hex-col" x="216.0" y="661.5" data-hex="" /><use href="#hex-col" x="324.0" y="661.5" data-hex="" /><use href="#hex-col" x="432.0" y="661.5" data-hex="" /><use href="#hex-col" x="540.0" y="661.5" data-hex="" /><use href="#hex-col" x="648.0" y="661.5" data-hex="" /><use href="#hex-col" x="756.0" y="661.5" data-hex="" /><use href="#hex-col" x="864.0" y="661.5" data-hex="" /><use href="#hex-col" x="972.0" y="661.5" data-hex="" /><use href="#hex-col" x="1080.0" y="661.5" data-hex="" /><use href="#hex-col" x="1188.0" y="661.5" data-hex="" /><use href="#hex-col" x="1296.0" y="661.5" data-hex="" /><use href="#hex-col" x="1404.0" y="661.5" data-hex="" /><use href="#hex-col" x="-54.0" y="678.7" data-hex="" /><use href="#hex-col" x="54.0" y="678.7" data-hex="" /><use href="#hex-col" x="162.0" y="678.7" data-hex="" /><use href="#hex-col" x="270.0" y="678.7" data-hex="" /><use href="#hex-col" x="378.0" y="678.7" data-hex="" /><use href="#hex-col" x="486.0" y="678.7" data-hex="" /><use href="#hex-col" x="594.0" y="678.7" data-hex="" /><use href="#hex-col" x="702.0" y="678.7" data-hex="" /><use href="#hex-col" x="810.0" y="678.7" data-hex="" /><use href="#hex-col" x="918.0" y="678.7" data-hex="" /><use href="#hex-col" x="1026.0" y="678.7" data-hex="" /><use href="#hex-col" x="1134.0" y="678.7" data-hex="" /><use href="#hex-col" x="1242.0" y="678.7" data-hex="" /><use href="#hex-col" x="1350.0" y="678.7" data-hex="" /><use href="#hex-col" x="1458.0" y="678.7" data-hex="" /><use href="#hex-col" x="0.0" y="695.8" data-hex="" /><use href="#hex-col" x="108.0" y="695.8" data-hex="" /><use href="#hex-col" x="216.0" y="695.8" data-hex="" /><use href="#hex-col" x="324.0" y="695.8" data-hex="" /><use href="#hex-col" x="432.0" y="695.8" data-hex="" /><use href="#hex-col" x="540.0" y="695.8" data-hex="" /><use href="#hex-col" x="648.0" y="695.8" data-hex="" /><use href="#hex-col" x="756.0" y="695.8" data-hex="" /><use href="#hex-col" x="864.0" y="695.8" data-hex="" /><use href="#hex-col" x="972.0" y="695.8" data-hex="" /><use href="#hex-col" x="1080.0" y="695.8" data-hex="" /><use href="#hex-col" x="1188.0" y="695.8" data-hex="" /><use href="#hex-col" x="1296.0" y="695.8" data-hex="" /><use href="#hex-col" x="1404.0" y="695.8" data-hex="" /><use href="#hex-col" x="-54.0" y="713.0" data-hex="" /><use href="#hex-col" x="54.0" y="713.0" data-hex="" /><use href="#hex-col" x="162.0" y="713.0" data-hex="" /><use href="#hex-col" x="270.0" y="713.0" data-hex="" /><use href="#hex-col" x="378.0" y="713.0" data-hex="" /><use href="#hex-col" x="486.0" y="713.0" data-hex="" /><use href="#hex-col" x="594.0" y="713.0" data-hex="" /><use href="#hex-col" x="702.0" y="713.0" data-hex="" /><use href="#hex-col" x="810.0" y="713.0" data-hex="" /><use href="#hex-col" x="918.0" y="713.0" data-hex="" /><use href="#hex-col" x="1026.0" y="713.0" data-hex="" /><use href="#hex-col" x="1134.0" y="713.0" data-hex="" /><use href="#hex-col" x="1242.0" y="713.0" data-hex="" /><use href="#hex-col" x="1350.0" y="713.0" data-hex="" /><use href="#hex-col" x="1458.0" y="713.0" data-hex="" /><use href="#hex-col" x="0.0" y="730.1" data-hex="" /><use href="#hex-col" x="108.0" y="730.1" data-hex="" /><use href="#hex-col" x="216.0" y="730.1" data-hex="" /><use href="#hex-col" x="324.0" y="730.1" data-hex="" /><use href="#hex-col" x="432.0" y="730.1" data-hex="" /><use href="#hex-col" x="540.0" y="730.1" data-hex="" /><use href="#hex-col" x="648.0" y="730.1" data-hex="" /><use href="#hex-col" x="756.0" y="730.1" data-hex="" /><use href="#hex-col" x="864.0" y="730.1" data-hex="" /><use href="#hex-col" x="972.0" y="730.1" data-hex="" /><use href="#hex-col" x="1080.0" y="730.1" data-hex="" /><use href="#hex-col" x="1188.0" y="730.1" data-hex="" /><use href="#hex-col" x="1296.0" y="730.1" data-hex="" /><use href="#hex-col" x="1404.0" y="730.1" data-hex="" /><use href="#hex-col" x="-54.0" y="747.3" data-hex="" /><use href="#hex-col" x="54.0" y="747.3" data-hex="" /><use href="#hex-col" x="162.0" y="747.3" data-hex="" /><use href="#hex-col" x="270.0" y="747.3" data-hex="" /><use href="#hex-col" x="378.0" y="747.3" data-hex="" /><use href="#hex-col" x="486.0" y="747.3" data-hex="" /><use href="#hex-col" x="594.0" y="747.3" data-hex="" /><use href="#hex-col" x="702.0" y="747.3" data-hex="" /><use href="#hex-col" x="810.0" y="747.3" data-hex="" /><use href="#hex-col" x="918.0" y="747.3" data-hex="" /><use href="#hex-col" x="1026.0" y="747.3" data-hex="" /><use href="#hex-col" x="1134.0" y="747.3" data-hex="" /><use href="#hex-col" x="1242.0" y="747.3" data-hex="" /><use href="#hex-col" x="1350.0" y="747.3" data-hex="" /><use href="#hex-col" x="1458.0" y="747.3" data-hex="" /><use href="#hex-col" x="0.0" y="764.4" data-hex="" /><use href="#hex-col" x="108.0" y="764.4" data-hex="" /><use href="#hex-col" x="216.0" y="764.4" data-hex="" /><use href="#hex-col" x="324.0" y="764.4" data-hex="" /><use href="#hex-col" x="432.0" y="764.4" data-hex="" /><use href="#hex-col" x="540.0" y="764.4" data-hex="" /><use href="#hex-col" x="648.0" y="764.4" data-hex="" /><use href="#hex-col" x="756.0" y="764.4" data-hex="" /><use href="#hex-col" x="864.0" y="764.4" data-hex="" /><use href="#hex-col" x="972.0" y="764.4" data-hex="" /><use href="#hex-col" x="1080.0" y="764.4" data-hex="" /><use href="#hex-col" x="1188.0" y="764.4" data-hex="" /><use href="#hex-col" x="1296.0" y="764.4" data-hex="" /><use href="#hex-col" x="1404.0" y="764.4" data-hex="" /><use href="#hex-col" x="-54.0" y="781.6" data-hex="" /><use href="#hex-col" x="54.0" y="781.6" data-hex="" /><use href="#hex-col" x="162.0" y="781.6" data-hex="" /><use href="#hex-col" x="270.0" y="781.6" data-hex="" /><use href="#hex-col" x="378.0" y="781.6" data-hex="" /><use href="#hex-col" x="486.0" y="781.6" data-hex="" /><use href="#hex-col" x="594.0" y="781.6" data-hex="" /><use href="#hex-col" x="702.0" y="781.6" data-hex="" /><use href="#hex-col" x="810.0" y="781.6" data-hex="" /><use href="#hex-col" x="918.0" y="781.6" data-hex="" /><use href="#hex-col" x="1026.0" y="781.6" data-hex="" /><use href="#hex-col" x="1134.0" y="781.6" data-hex="" /><use href="#hex-col" x="1242.0" y="781.6" data-hex="" /><use href="#hex-col" x="1350.0" y="781.6" data-hex="" /><use href="#hex-col" x="1458.0" y="781.6" data-hex="" /><use href="#hex-col" x="0.0" y="798.7" data-hex="" /><use href="#hex-col" x="108.0" y="798.7" data-hex="" /><use href="#hex-col" x="216.0" y="798.7" data-hex="" /><use href="#hex-col" x="324.0" y="798.7" data-hex="" /><use href="#hex-col" x="432.0" y="798.7" data-hex="" /><use href="#hex-col" x="540.0" y="798.7" data-hex="" /><use href="#hex-col" x="648.0" y="798.7" data-hex="" /><use href="#hex-col" x="756.0" y="798.7" data-hex="" /><use href="#hex-col" x="864.0" y="798.7" data-hex="" /><use href="#hex-col" x="972.0" y="798.7" data-hex="" /><use href="#hex-col" x="1080.0" y="798.7" data-hex="" /><use href="#hex-col" x="1188.0" y="798.7" data-hex="" /><use href="#hex-col" x="1296.0" y="798.7" data-hex="" /><use href="#hex-col" x="1404.0" y="798.7" data-hex="" /></svg>
+    <div class="hero_shade"></div>
+  </div>
+  <div class="rails" aria-hidden="true"></div>
 
-  <main>
-    <img class="mark" src="assets/mark.svg" alt="Dreamreach logo">
-    <img class="wordmark" src="assets/type-white.png" width="1200" height="106" alt="Dreamreach">
-
-    <p class="eyebrow">Coming soon</p>
-    <h1>Helping local businesses and creators <strong>reach further</strong>.</h1>
-    <p class="sub">Websites, search visibility, and steady growth. Our full site is under construction. Until then, we are one message away.</p>
-    <a class="cta" href="mailto:support@dreamreach.io">Email Dreamreach</a>
+  <main class="hero_content">
+    <div class="hero_inner">
+      <img class="mark" src="assets/mark.svg" width="120" height="120" alt="">
+      <img class="wordmark" src="assets/type-white.png" width="1200" height="106" alt="Dreamreach">
+      <p class="eyebrow"><span class="eyebrow_dot"></span>Coming soon</p>
+      <h1>Helping local businesses and creators <span class="muted">reach further.</span></h1>
+      <p class="sub">Websites, search visibility, and steady growth. Our full site is under construction. Until then, we are one message away.</p>
+      <a class="button" href="mailto:support@dreamreach.io">Email Dreamreach<svg class="button_arrow" aria-hidden="true" focusable="false" fill="none" viewBox="0 0 11 11"><path stroke-width="1.2" stroke="currentColor" d="M1 10 10 1M3.5 1H10v6.5"/></svg></a>
+    </div>
   </main>
 
-  <footer>&copy; 2026 Dreamreach</footer>
+  <footer class="foot">&copy; 2026 Dreamreach</footer>
+</div>
 </body>
 </html>

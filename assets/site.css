@@ -1,0 +1,141 @@
+/*! Fonts: Fraunces, Inter Tight, Martian Mono - SIL OFL 1.1, see assets/fonts/OFL.txt */
+/* site.css - Dreamreach coming-soon page in the Basalt look (port: clients/dreamreach/websites/build/basalt-port).
+   Fraunces (c) The Fraunces Project Authors; Inter Tight (c) The Inter Project Authors; Martian Mono (c) Evil Martians.
+   Dark only: no theme toggle on this interim page (declared deviation from D-1156); ground stays Basalt #0a0a0b, not the
+   brand's #0F0F16 (declared deviation from S1, stage 2 maps the tokens). Brand colour = the mark file, the cyan CTA (D-1144),
+   the eyebrow dot and the focus ring; 120-degree corner marks on the button (D-1145); the gradient lives only in the mark (M10). */
+
+@font-face { font-family: Fraunces; src: url("fonts/Fraunces-Variable.woff2") format("woff2"); font-weight: 300 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter Tight"; src: url("fonts/InterTight-Variable.woff2") format("woff2"); font-weight: 400 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Martian Mono"; src: url("fonts/MartianMono-Variable.woff2") format("woff2"); font-weight: 300 600; font-style: normal; font-display: swap; }
+
+:root {
+  color-scheme: dark;
+  --bg: #0a0a0b;          /* Basalt neutral-950 */
+  --ink: #ededea;         /* neutral-100 */
+  --ink-2: #b4b4b9;       /* neutral-300 */
+  --ink-3: #a3a3aa;       /* muted, lifted from Basalt's #7a7a81 (4.43:1) to clear 4.5:1 over the field */
+  --rail: #ededea14;
+  --cyan: #6eccdd;
+  --focus: #6eccdd;       /* the ring: cyan on the ground, outside a dark gap, never on the fill */
+  --cta: #6eccdd;         /* the one CTA (D-1144); label #0a0a0b on it */
+  --cta-hover: #c2f0f7;   /* hover step: a clearly lighter cyan */
+  --edge-mask: linear-gradient(to right, #0000, #000 min(4rem, 10vw), #000 calc(100% - min(4rem, 10vw)), #0000);
+  --field: #232326;       /* column colour before the script runs (no JS) */
+  --shade: linear-gradient(#0a0a0b 0%, #0a0a0beb 30%, #0a0a0b40 62%, #0a0a0b1a 80%, #0a0a0b 100%); /* Basalt's */
+  --floor: linear-gradient(to top, #0a0a0b 3rem, #0a0a0b00 4.75rem);  /* solid under the footer line */
+  /* closest-side: fully transparent at its own box edge on every side, so the box never shows as a seam */
+  --scrim: radial-gradient(closest-side, #0a0a0be0 0%, #0a0a0bd8 65%, #0a0a0b00 100%);
+  --gutter: 2.5rem;
+  --site-max: 87.5rem;
+  --font-display: Fraunces, Georgia, "Times New Roman", serif;
+  --font-text: "Inter Tight", system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-mono: "Martian Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (max-width: 991px) { :root { --gutter: 2rem; } }
+@media (max-width: 767px) { :root { --gutter: .75rem; } }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1rem/1.55 var(--font-text); }
+h1, p { margin: 0; }
+img { display: block; max-width: 100%; height: auto; }
+
+/* the hero: one screen, the field behind, content centred both ways */
+.hero { position: relative; isolation: isolate; overflow: hidden; display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh; }
+
+.hero_bg, .rails {
+  position: absolute; top: 0; bottom: 0; left: var(--gutter); right: var(--gutter);
+  max-width: var(--site-max); margin-inline: auto; pointer-events: none;
+}
+.hero_bg { z-index: -1; overflow: hidden; opacity: .75; }
+.rails { border-inline: 1px solid var(--rail); }
+
+/* bottom: 1rem - the field's last 3rem sit under the solid floor anyway; lifting it 1rem keeps decoration out of the
+   page-bottom air the qa floor measures (F-76 counts the svg as content) */
+.hero_columns { position: absolute; left: 0; right: 0; bottom: 1rem; width: 100%; height: 82%; color: var(--field);
+  -webkit-mask-image: var(--edge-mask); mask-image: var(--edge-mask); /* lifted columns fade out at the rails */
+}
+/* the script draws the first frame, then shows the field: no flat -> drop -> rise jump. Gated on (scripting: enabled),
+   not an inline class script, so a strict CSP needs no exception (F-15). JS off = the flat field shows at once; a script
+   that never runs shows it after 4 s; a browser without the media feature shows the field at once, as before. */
+@media (scripting: enabled) {
+  .hero_columns { opacity: 0; animation: field-late 0s 4s forwards; }
+  .hero_columns.on { opacity: 1; transition: opacity .5s ease-out; }
+}
+@keyframes field-late { to { opacity: 1; } }
+/* Basalt's vertical shade. The idle field never gets brighter than about #282828 under the text, so it needs no more.
+   The cursor lift (fine pointers only) can raise a column to rgb(220,220,222): there a scrim drawn from the content
+   block itself (.hero_inner::before) keeps every text line at 4.5:1 or more at any viewport (qa verify/contrast.tsv),
+   and the field stays visible wherever there is no text. */
+.hero_shade { position: absolute; inset: 0; background: var(--floor), var(--shade); }
+
+.hero_content {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+  padding: 4.5rem calc(var(--gutter) + 1.25rem) 2rem;
+}
+.hero_inner { position: relative; display: flex; flex-direction: column; align-items: center; }
+@media (hover: hover) and (pointer: fine) {
+  .hero_inner::before { content: ""; position: absolute; inset: -40% -8rem; z-index: -1; pointer-events: none; background: var(--scrim); }
+}
+
+.mark { width: clamp(72px, 12vmin, 120px); }
+.wordmark { width: clamp(168px, 24vw, 252px); margin-top: 1.125rem; }
+
+/* Basalt's font-stretch: 87.5% dropped: measured, it renders the same width as 100 % in this Martian Mono file (the
+   width axis moves only at 75 % and 112.5 %), so it was a no-op in the reference too */
+.eyebrow, .foot {
+  font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .04em;
+}
+.eyebrow { display: inline-flex; align-items: center; gap: .625rem; margin-top: 3rem; font-size: .75rem; line-height: 1.4; color: var(--ink-3); }
+.eyebrow_dot { width: .375rem; height: .375rem; background: var(--cyan); flex: none; }
+
+h1 {
+  margin-top: 1.5rem; max-width: 17ch;
+  font: 360 clamp(2.5rem, 1.6rem + 3.6vw, 5rem) / .98 var(--font-display);
+  font-variation-settings: "opsz" 72, "SOFT" 0, "WONK" 0;
+  letter-spacing: -.02em; text-wrap: balance;
+}
+.muted { color: var(--ink-3); }
+@media (min-width: 768px) {
+  h1 { max-width: 20ch; }
+  .muted { display: block; } /* Basalt's two-tone h1: the muted line on its own */
+}
+
+.sub {
+  margin-top: 1.5rem; max-width: 34rem; color: var(--ink-2);
+  font-size: clamp(1.0625rem, 1rem + .3vw, 1.25rem); line-height: 1.5; letter-spacing: -.01em; text-wrap: pretty;
+}
+
+/* the one action: cyan CTA (D-1144), label in Inter Tight (D-1143), 120-degree corner marks just outside it (D-1145).
+   On keyboard focus the marks give way to the ring, so the two never read as a doubled frame. The ring is a box-shadow
+   stack: 4 px dark gap, 2 px cyan, 2 px dark halo, so it touches only the ground colour (10.6:1) whatever the field
+   lifts behind it; the transparent outline stays for forced-colours mode. */
+.button {
+  position: relative; display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  min-height: 3rem; margin-top: 2.5rem; padding: 0 1.5rem;
+  background: var(--cta); color: var(--bg); text-decoration: none; white-space: nowrap;
+  font: 600 1rem/1 var(--font-text); letter-spacing: -.005em;
+  transition: transform .16s cubic-bezier(.23, 1, .32, 1), background-color .2s;
+}
+.button::after {
+  content: ""; position: absolute; inset: -7px -9px; pointer-events: none; opacity: .6;
+  background: url("corners-120.svg") 0 0 / 100% 100% no-repeat;
+  transition: opacity .2s;
+}
+.button:active { transform: scale(.97); }
+.button:focus-visible { outline: 2px solid transparent; outline-offset: 4px; box-shadow: 0 0 0 4px var(--bg), 0 0 0 6px var(--focus), 0 0 0 8px var(--bg); }
+.button:focus-visible::after { opacity: 0; }
+.button_arrow { flex: none; width: .75rem; height: .75rem; }
+
+.foot { padding: 1.25rem calc(var(--gutter) + 1.25rem) 1.75rem; text-align: center; font-size: .75rem; line-height: 1.4; color: var(--ink-3); }
+
+@media (hover: hover) {
+  .button:hover { background: var(--cta-hover); }
+  .button:hover::after { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .button, .button::after { transition: none; }
+  .hero_columns.on { transition: none; }
+  .button:active { transform: none; }
+}
