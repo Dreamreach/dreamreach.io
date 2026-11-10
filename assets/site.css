@@ -25,7 +25,8 @@
   --shade: linear-gradient(#0a0a0b 0%, #0a0a0beb 30%, #0a0a0b40 62%, #0a0a0b1a 80%, #0a0a0b 100%); /* Basalt's */
   --floor: linear-gradient(to top, #0a0a0b 3rem, #0a0a0b00 4.75rem);  /* solid under the footer line */
   /* closest-side: fully transparent at its own box edge on every side, so the box never shows as a seam */
-  --scrim: radial-gradient(closest-side, #0a0a0be0 0%, #0a0a0bd8 65%, #0a0a0b00 100%);
+  /* light, because field.js caps the cursor lift's brightness behind the content block (CAP in field.js) */
+  --scrim: radial-gradient(closest-side, #0a0a0b66 0%, #0a0a0b59 60%, #0a0a0b00 100%);
   --gutter: 2.5rem;
   --site-max: 87.5rem;
   --font-display: Fraunces, Georgia, "Times New Roman", serif;
@@ -65,9 +66,9 @@ img { display: block; max-width: 100%; height: auto; }
 }
 @keyframes field-late { to { opacity: 1; } }
 /* Basalt's vertical shade. The idle field never gets brighter than about #282828 under the text, so it needs no more.
-   The cursor lift (fine pointers only) can raise a column to rgb(220,220,222): there a scrim drawn from the content
-   block itself (.hero_inner::before) keeps every text line at 4.5:1 or more at any viewport (qa verify/contrast.tsv),
-   and the field stays visible wherever there is no text. */
+   The cursor lift (fine pointers only) can raise a column to rgb(220,220,222) away from the text; behind the content
+   block field.js caps it at 70, and a light scrim drawn from the block itself (.hero_inner::before) keeps every text
+   line at 5:1 or more at any viewport (qa verify/contrast.tsv) while the hexes stay visible behind the copy. */
 .hero_shade { position: absolute; inset: 0; background: var(--floor), var(--shade); }
 
 .hero_content {

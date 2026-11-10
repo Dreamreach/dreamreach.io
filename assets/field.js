@@ -8,7 +8,7 @@ const field = document.querySelector('.hero_columns');
 
 if (field) {
   const grays = Array.from({ length: 256 }, (_, i) => `rgb(${i},${i},${Math.min(255, i + 2)})`);
-  const hexes = [...field.querySelectorAll('[data-hex]')].map((el) => ({ el, x: +el.getAttribute('x'), y: +el.getAttribute('y'), seed: Math.random(), g: -1 }));
+  const hexes = [...field.querySelectorAll('[data-hex]')].map((el) => ({ el, x: +el.getAttribute('x'), y: +el.getAttribute('y'), seed: Math.random(), g: -1, cap: 220 }));
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
   const fine = matchMedia('(hover: hover) and (pointer: fine)');
   const mouse = { x: OFF, y: OFF }, target = { x: OFF, y: OFF };
@@ -17,8 +17,21 @@ if (field) {
   // field drawn "xMidYMax slice" in a 1440 x 760 box: s = scale, client point -> SVG units
   const scale = (r) => Math.max(r.width / W, r.height / H);
   const toSvg = (cx, cy) => { const r = field.getBoundingClientRect(), s = scale(r); return { x: (cx - r.left - (r.width - W * s) / 2) / s, y: (cy - r.top - (r.height - H * s)) / s }; };
+  // the cursor lift may not brighten a column behind the text past CAP: an ellipse round the content block (its box
+  // corners on the rim), a smooth ramp from 0.9 to 1.25 x that ellipse, full brightness beyond. The rise of up to 140 svg
+  // units is counted, so a column lifted from below cannot carry its glow into the text.
+  const CAP = 70, block = document.querySelector('.hero_inner');
+  const caps = () => {
+    if (!block) return;
+    const b = block.getBoundingClientRect(), p = toSvg(b.left, b.top), q = toSvg(b.right, b.bottom);
+    const cx = (p.x + q.x) / 2, cy = (p.y + q.y) / 2, a = (q.x - p.x) * 0.71, c = (q.y - p.y) * 0.71;
+    for (const h of hexes) {
+      const yy = Math.min(h.y, Math.max(h.y - 140, cy)), d = Math.hypot((h.x - cx) / a, (yy - cy) / c);
+      const s = Math.min(1, Math.max(0, (d - 0.9) / 0.35)); h.cap = CAP + (220 - CAP) * s * s * (3 - 2 * s);
+    }
+  };
   // only the columns inside the visible slice move (a phone sees about a third of the field)
-  const cull = () => { const r = field.getBoundingClientRect(), half = r.width / scale(r) / 2 + 40; live = hexes.filter((h) => Math.abs(h.x - W / 2) < half); };
+  const cull = () => { const r = field.getBoundingClientRect(), half = r.width / scale(r) / 2 + 40; live = hexes.filter((h) => Math.abs(h.x - W / 2) < half); caps(); };
 
   const draw = (t, intro) => {
     mouse.x += (target.x - mouse.x) * 0.08; mouse.y += (target.y - mouse.y) * 0.08;
@@ -26,7 +39,7 @@ if (field) {
       const dx = h.x - mouse.x, dy = h.y - mouse.y, bump = Math.exp(-(dx * dx + dy * dy) / R2);
       const lift = 14 * (Math.sin(h.x * 0.009 + t * 0.5) + Math.cos(h.y * 0.016 - t * 0.35) + Math.sin((h.x + h.y) * 0.005 + t * 0.25)) + h.seed * 8 + bump * LIFT + intro;
       h.el.style.transform = `translateY(${(-lift).toFixed(1)}px)`;
-      const g = Math.max(10, Math.min(220, (20 + (lift + 40) * 0.32 + bump * 110) | 0));
+      const g = Math.max(10, Math.min(h.cap, (20 + (lift + 40) * 0.32 + bump * 110) | 0));
       if (g !== h.g) { h.g = g; h.el.style.color = grays[g]; }
     }
   };
@@ -54,5 +67,6 @@ if (field) {
 
   if (reduce.matches) still();
   else { cull(); draw(0, INTRO); start(); }
-  field.classList.add('on'); // the first frame is drawn: show the field (site.css hides it under .js until now)
+  field.classList.add('on'); // the first frame is drawn: show the field (site.css hides it under @media (scripting: enabled) until now)
+  document.fonts?.ready.then(() => { if (raf) cull(); }); // web fonts change the content block's size: recount the caps
 }
