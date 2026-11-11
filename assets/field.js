@@ -20,14 +20,17 @@ if (field) {
   // the cursor lift may not brighten a column behind the text past CAP: an ellipse round the content block (its box
   // corners on the rim), a smooth ramp from 0.9 to 1.25 x that ellipse, full brightness beyond. The rise of up to 140 svg
   // units is counted, so a column lifted from below cannot carry its glow into the text.
-  const CAP = 70, block = document.querySelector('.hero_inner');
+  const CAP = 70, block = document.querySelector('.hero_inner'), foot = document.querySelector('.foot');
   const caps = () => {
     if (!block) return;
     const b = block.getBoundingClientRect(), p = toSvg(b.left, b.top), q = toSvg(b.right, b.bottom);
     const cx = (p.x + q.x) / 2, cy = (p.y + q.y) / 2, a = (q.x - p.x) * 0.71, c = (q.y - p.y) * 0.71;
+    // the footer line has no solid floor under it any more: columns at its height and below take the same cap
+    const fy = foot ? toSvg(0, foot.getBoundingClientRect().top).y : Infinity;
     for (const h of hexes) {
       const yy = Math.min(h.y, Math.max(h.y - 140, cy)), d = Math.hypot((h.x - cx) / a, (yy - cy) / c);
       const s = Math.min(1, Math.max(0, (d - 0.9) / 0.35)); h.cap = CAP + (220 - CAP) * s * s * (3 - 2 * s);
+      h.cap = Math.min(h.cap, CAP + (220 - CAP) * Math.min(1, Math.max(0, (fy - h.y) / 60)));
     }
   };
   // only the columns inside the visible slice move (a phone sees about a third of the field)
@@ -69,4 +72,10 @@ if (field) {
   else { cull(); draw(0, INTRO); start(); }
   field.classList.add('on'); // the first frame is drawn: show the field (site.css hides it under @media (scripting: enabled) until now)
   document.fonts?.ready.then(() => { if (raf) cull(); }); // web fonts change the content block's size: recount the caps
+}
+
+// Basalt's bottom blur: Chrome and Edge give each layer one of the SVG filters #kb-0..#kb-4 (soft blur plus a slight
+// RGB split) as its backdrop filter; other browsers keep the plain CSS blur from site.css.
+if (window.chrome && window.CSS && CSS.supports('backdrop-filter', 'url(#kb-0)') && document.getElementById('kb-0')) {
+  document.querySelectorAll('.bottom-blur_layer').forEach((layer, i) => { layer.style.backdropFilter = `url(#kb-${i})`; layer.style.webkitBackdropFilter = `url(#kb-${i})`; });
 }
