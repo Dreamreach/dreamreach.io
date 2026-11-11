@@ -2,8 +2,9 @@
 /* site.css - Dreamreach coming-soon page in the Basalt look (port: clients/dreamreach/websites/build/basalt-port).
    Fraunces (c) The Fraunces Project Authors; Inter Tight (c) The Inter Project Authors; Martian Mono (c) Evil Martians.
    Dark only: no theme toggle on this interim page (declared deviation from D-1156); ground stays Basalt #0a0a0b, not the
-   brand's #0F0F16 (declared deviation from S1, stage 2 maps the tokens). Brand colour = the mark file, the cyan CTA (D-1144),
-   the eyebrow dot and the focus ring; 120-degree corner marks on the button (D-1145); the gradient lives only in the mark (M10). */
+   brand's #0F0F16 (declared deviation from S1, stage 2 maps the tokens). Owner 2026-11-11: white mark, accents as in the original Basalt
+   (light button, light eyebrow dot, light focus ring); brand colours come back on the full site. 120-degree corner marks on the
+   button stay (D-1145). */
 
 @font-face { font-family: Fraunces; src: url("fonts/Fraunces-Variable.woff2") format("woff2"); font-weight: 300 500; font-style: normal; font-display: swap; }
 @font-face { font-family: "Inter Tight"; src: url("fonts/InterTight-Variable.woff2") format("woff2"); font-weight: 400 700; font-style: normal; font-display: swap; }
@@ -16,10 +17,9 @@
   --ink-2: #b4b4b9;       /* neutral-300 */
   --ink-3: #a3a3aa;       /* muted, lifted from Basalt's #7a7a81 (4.43:1) to clear 4.5:1 over the field */
   --rail: #ededea14;
-  --cyan: #6eccdd;
-  --focus: #6eccdd;       /* the ring: cyan on the ground, outside a dark gap, never on the fill */
-  --cta: #6eccdd;         /* the one CTA (D-1144); label #0a0a0b on it */
-  --cta-hover: #c2f0f7;   /* hover step: a clearly lighter cyan */
+  --focus: #ededea;       /* the ring: light on the ground, outside a dark gap, never on the fill */
+  --cta: #ededea;         /* Basalt's button: neutral-100, label #0a0a0b on it */
+  --cta-hover: #fff;      /* Basalt's hover step */
   --edge-mask: linear-gradient(to right, #0000, #000 min(4rem, 10vw), #000 calc(100% - min(4rem, 10vw)), #0000);
   --field: #232326;       /* column colour before the script runs (no JS) */
   --shade: linear-gradient(#0a0a0b 0%, #0a0a0beb 30%, #0a0a0b40 62%, #0a0a0b1a 80%, #0a0a0b 100%); /* Basalt's */
@@ -89,7 +89,7 @@ img { display: block; max-width: 100%; height: auto; }
   font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .04em;
 }
 .eyebrow { display: inline-flex; align-items: center; gap: .625rem; margin-top: 3rem; font-size: .75rem; line-height: 1.4; color: var(--ink-3); }
-.eyebrow_dot { width: .375rem; height: .375rem; background: var(--cyan); flex: none; }
+.eyebrow_dot { width: .375rem; height: .375rem; background: var(--ink); flex: none; }
 
 h1 {
   margin-top: 1.5rem; max-width: 17ch;
@@ -108,9 +108,9 @@ h1 {
   font-size: clamp(1.0625rem, 1rem + .3vw, 1.25rem); line-height: 1.5; letter-spacing: -.01em; text-wrap: pretty;
 }
 
-/* the one action: cyan CTA (D-1144), label in Inter Tight (D-1143), 120-degree corner marks just outside it (D-1145).
+/* the one action: Basalt's light button, label in Inter Tight (D-1143), 120-degree corner marks just outside it (D-1145).
    On keyboard focus the marks give way to the ring, so the two never read as a doubled frame. The ring is a box-shadow
-   stack: 4 px dark gap, 2 px cyan, 2 px dark halo, so it touches only the ground colour (10.6:1) whatever the field
+   stack: 4 px dark gap, 2 px light, 2 px dark halo, so it touches only the ground colour (16.7:1) whatever the field
    lifts behind it; the transparent outline stays for forced-colours mode. */
 .button {
   position: relative; display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
